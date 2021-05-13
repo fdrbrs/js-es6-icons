@@ -106,7 +106,7 @@ const icons = [
 	}
 ];
 
-//creo un ciclo for each per creare 3 array dove metto i diversi type di icone
+//creo un ciclo for each per creare 3 array dove metto i diversi type di icone, aggiungo chiave colore e i valori corrispondenti
 let animalIcons = [], vegetableIcons = [], userIcons = [];
 icons.forEach(icon => {
     if(icon.type === 'animal'){
@@ -121,13 +121,73 @@ icons.forEach(icon => {
     }
 });
 
-
-icons.forEach((icon) => {
+//creo un ciclo for each per inserire nell'html le icone e il nome di ciascuna
+/* icons.forEach((icon) => {
+    icon.display = 'initial'
     document.getElementById('container').insertAdjacentHTML("beforeend", `
-        <div class="icon">
+        <div class="icon" style="display: ${icon.display}">
                 <i class="${icon.family}  ${icon.prefix}${icon.name}" style="color: ${icon.color};"></i>
                 <div class="icon_name">${icon.name}</div>
                 
         </div>
     `)
 });
+ */
+//creo un if per filtrare le icone con il select
+
+const selection = document.getElementById('icon_types');
+
+document.getElementById('icon_types').addEventListener('change', function(){
+
+    if (selection.value === 'animal') {
+        icons.forEach(icon => {
+            if (icon.type != 'animal'){
+                icon.display = 'none';
+            }
+        });
+    } else if (selection.value === 'vegetable'){
+        icons.forEach(icon => {
+            if (icon.type != 'vegetable'){
+                icon.display = 'none';
+            }
+        });
+    } else if (selection.value === 'user'){
+        icons.forEach(icon => {
+            if (icon.type != 'user'){
+                icon.display = 'none';
+            }
+        });
+    } else {
+        icons.forEach(icon => {
+            icon.display = 'inital'
+        });
+    }
+
+});
+
+icons.forEach((icon) => {
+    icon.display = 'initial'
+    document.getElementById('container').insertAdjacentHTML("beforeend", `
+        <div class="icon" style="display: ${icon.display}">
+                <i class="${icon.family}  ${icon.prefix}${icon.name}" style="color: ${icon.color};"></i>
+                <div class="icon_name">${icon.name}</div>
+                
+        </div>
+    `)
+});
+
+
+
+
+
+
+
+
+
+/* if (selection.value == 'animal') {
+    icons.forEach(icon => {
+        if (icon.type != animal){
+            icon.display = none;
+        }
+    });
+} */
