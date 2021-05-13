@@ -110,12 +110,24 @@ const icons = [
 let animalIcons = [], vegetableIcons = [], userIcons = [];
 icons.forEach(icon => {
     if(icon.type === 'animal'){
+        icon.color = '#0000FF';
         animalIcons.push(icon);
     } else if (icon.type === 'vegetable'){
+        icon.color = '#FFA500';
         vegetableIcons.push(icon);
     } else {
-        userIcons.push(icon)
+        icon.color = '#800080';
+        userIcons.push(icon);
     }
 });
 
-console.log(animalIcons,vegetableIcons,userIcons);
+
+icons.forEach((icon) => {
+    document.getElementById('container').insertAdjacentHTML("beforeend", `
+        <div class="icon">
+                <i class="${icon.family}  ${icon.prefix}${icon.name}" style="color: ${icon.color};"></i>
+                <div class="icon_name">${icon.name}</div>
+                
+        </div>
+    `)
+});
